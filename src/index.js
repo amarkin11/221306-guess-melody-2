@@ -14,6 +14,7 @@ const init = () => {
       <App
         time={settings.time}
         errorCount={settings.errorCount}
+        onButtonClick={() => {}}
       />,
       document.querySelector(`#root`)
   );

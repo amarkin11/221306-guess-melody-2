@@ -8,7 +8,7 @@ it(`App correctly renders after relaunch`, () => {
     .create(<App
       errorCount={0}
       time={0}
-      // onClick={jest.fn()}
+      onButtonClick={() => {}}
     />)
     .toJSON();
 
