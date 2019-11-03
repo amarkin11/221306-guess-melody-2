@@ -1,30 +1,72 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const App = (props) => {
-  const {time, errorCount, onButtonClick} = props;
+import WelcomeScreen from '../welcome-screen/welcome-screen';
+import GenreQuestionScreen from "../genre-question-screen/genre-question-screen";
+import ArtistQuestionScreen from "../artist-question-screen/artist-question-screen";
 
-  return <section className="welcome">
-    <div className="welcome__logo">
-      <img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83" />
-    </div>
-    <button className="welcome__button" onClick={onButtonClick}>
-      <span className="visually-hidden">Начать игру</span>
-    </button>
-    <h2 className="welcome__rules-title">Правила игры</h2>
-    <p className="welcome__text">Правила просты:</p>
-    <ul className="welcome__rules-list">
-      <li>За {time} минут нужно ответить на все вопросы.</li>
-      <li>Можно допустить {errorCount} ошибки.</li>
-    </ul>
-    <p className="welcome__text">Удачи!</p>
-  </section>;
+class App extends React.PureComponent {
+  static getScreen(question, props, onUserAnswer) {
+    if (question === -1) {
+      const {
+        gameTime,
+        errorCount,
+      } = props;
+
+      return <WelcomeScreen 
+        time={gameTime} 
+        errorCount={errorCount}
+        onStartButtonClick={onUserAnswer}
+      />;
+    }
+    
+    const {questions} = props;
+    const currentQuestion = questions[question];
+    switch (currentQuestion.type) {
+      case `genre`: return <GenreQuestionScreen
+        screenIndex={question}
+        question={currentQuestion}
+        onAnswer={onUserAnswer}
+      />;
+
+      case `artist`: return <ArtistQuestionScreen
+        screenIndex={question}
+        question={currentQuestion}
+        onAnswer={onUserAnswer}
+      />;
+    }
+    
+    return null;
+  }
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      question: -1,
+    };
+  }
+
+  render() {
+    const {gameTime, errorCount, questions} = this.props;
+    const {question} = this.state;
+
+    return App.getScreen(question, this.props, () => {
+      this.setState((prevState) => {
+        const nextIndex = prevState.question + 1;
+        const isEnd = nextIndex >= questions.length;
+
+        return {
+          question: !isEnd ? nextIndex : -1,
+        };
+      });
+    });
+  }
 };
 
 App.propTypes = {
-  time: PropTypes.number.isRequired,
-  errorCount: PropTypes.number.isRequired,
-  onButtonClick: PropTypes.func.isRequired
+  gameTime: PropTypes.number.isRequired,
+  errorCount: PropTypes.number.isRequired
 };
 
 export default App;

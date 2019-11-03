@@ -1,14 +1,14 @@
 
 import React from 'react';
 import renderer from 'react-test-renderer';
-import App from './app';
+import WelcomeScreen from './welcome-screen';
 
-it(`App correctly renders after relaunch`, () => {
+it(`Welcome screen correctly renders after relaunch`, () => {
   const tree = renderer
-    .create(<App
+    .create(<WelcomeScreen
       errorCount={0}
       time={0}
-      // onButtonClick={() => {}}
+      onButtonClick={() => {}}
     />)
     .toJSON();
 

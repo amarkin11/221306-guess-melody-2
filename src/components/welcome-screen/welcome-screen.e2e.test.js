@@ -2,19 +2,19 @@
 import React from "react";
 import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import App from './app';
+import WelcomeScreen from './welcome-screen';
 
 Enzyme.configure({adapter: new Adapter()});
 
-it(`App start button click`, () => {
+it(`Welcome screen start button click`, () => {
   const clickHandler = jest.fn();
-  const app = shallow(<App
+  const welcomeScreen = shallow(<WelcomeScreen
     errorCount={0}
     time={0}
     onButtonClick={clickHandler}
   />);
 
-  const startButton = app.find(`button`);
+  const startButton = welcomeScreen.find(`button`);
   startButton.simulate(`click`);
 
   expect(clickHandler).toHaveBeenCalledTimes(1);
