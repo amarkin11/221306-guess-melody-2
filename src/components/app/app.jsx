@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import WelcomeScreen from '../welcome-screen/welcome-screen';
+import WelcomeScreen from "../welcome-screen/welcome-screen";
 import GenreQuestionScreen from "../genre-question-screen/genre-question-screen";
 import ArtistQuestionScreen from "../artist-question-screen/artist-question-screen";
 
@@ -13,13 +13,12 @@ class App extends React.PureComponent {
         errorCount,
       } = props;
 
-      return <WelcomeScreen 
-        time={gameTime} 
+      return <WelcomeScreen
+        time={gameTime}
         errorCount={errorCount}
         onStartButtonClick={onUserAnswer}
       />;
     }
-    
     const {questions} = props;
     const currentQuestion = questions[question];
     switch (currentQuestion.type) {
@@ -35,7 +34,6 @@ class App extends React.PureComponent {
         onAnswer={onUserAnswer}
       />;
     }
-    
     return null;
   }
 
@@ -48,7 +46,7 @@ class App extends React.PureComponent {
   }
 
   render() {
-    const {gameTime, errorCount, questions} = this.props;
+    const {questions} = this.props;
     const {question} = this.state;
 
     return App.getScreen(question, this.props, () => {
@@ -62,11 +60,23 @@ class App extends React.PureComponent {
       });
     });
   }
-};
+}
 
 App.propTypes = {
   gameTime: PropTypes.number.isRequired,
-  errorCount: PropTypes.number.isRequired
+  errorCount: PropTypes.number.isRequired,
+  questions: PropTypes.arrayOf(PropTypes.exact({
+    type: PropTypes.string.isRequired,
+    genre: PropTypes.string,
+    answers: PropTypes.arrayOf(PropTypes.exact({
+      src: PropTypes.string.isRequired,
+      genre: PropTypes.string.isRequired,
+    })).isRequired,
+    song: PropTypes.shape({
+      artist: PropTypes.string.isRequired,
+      src: PropTypes.string.isRequired
+    })
+  })).isRequired
 };
 
 export default App;

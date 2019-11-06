@@ -1,6 +1,6 @@
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
 const ArtistQuestionScreen = ({question, screenIndex, onAnswer}) => {
   const {answers} = question;
@@ -55,21 +55,21 @@ const ArtistQuestionScreen = ({question, screenIndex, onAnswer}) => {
   </section>;
 };
 
-// ArtistQuestionScreen.PropTypes = {
-//   question: PropTypes.exact({
-//     type: PropTypes.string.isRequired,
-//     song: PropTypes.exact({
-//       atrist: PropTypes.string.isRequired,
-//       src: PropTypes.string.isRequired
-//     }).isRequired,
-//     answers: PropTypes.arrayOf(exact({
-//       picture: PropTypes.string.isRequired,
-//       artist: PropTypes.string.isRequired,
-//     })).isRequired,
-//   }).isRequired,
-//   screenIndex: PropTypes.number.isRequired,
-//   onAnswer: PropTypes.func.isRequired
-// };
+ArtistQuestionScreen.PropTypes = {
+  question: PropTypes.exact({
+    type: PropTypes.string.isRequired,
+    song: PropTypes.exact({
+      atrist: PropTypes.string.isRequired,
+      src: PropTypes.string.isRequired
+    }).isRequired,
+    answers: PropTypes.arrayOf(PropTypes.exact({
+      picture: PropTypes.string.isRequired,
+      artist: PropTypes.string.isRequired,
+    })).isRequired,
+  }).isRequired,
+  screenIndex: PropTypes.number.isRequired,
+  onAnswer: PropTypes.func.isRequired
+};
 
 export default ArtistQuestionScreen;
 

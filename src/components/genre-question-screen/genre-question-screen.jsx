@@ -1,6 +1,6 @@
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
 const GenreQuestionScreen = ({question, screenIndex, onAnswer}) => {
   const {answers, genre} = question;
@@ -32,8 +32,8 @@ const GenreQuestionScreen = ({question, screenIndex, onAnswer}) => {
     <section className="game__screen">
       <h2 className="game__title">Выберите {genre} треки</h2>
       <form className="game__tracks" onSubmit={(evt) => {
-          evt.preventDefault();
-          onAnswer();
+        evt.preventDefault();
+        onAnswer();
       }}>
         {answers.map((it, i) => (
           <div className="track" key={`${screenIndex}-answer-${i}`}>
@@ -50,20 +50,20 @@ const GenreQuestionScreen = ({question, screenIndex, onAnswer}) => {
         <button className="game__submit button" type="submit">Ответить</button>
       </form>
     </section>
-  </section>
+  </section>;
 };
 
-// GenreQuestionScreen.PropTypes = {
-//   question: PropTypes.exact({
-//     type: PropTypes.string.isRequired,
-//     genre: PropTypes.string.isRequired,
-//     answers: PropTypes.arrayOf(exact({
-//       src: PropTypes.string.isRequired,
-//       genre: PropTypes.string.isRequired,
-//     })).isRequired,
-//   }).isRequired,
-//   screenIndex: PropTypes.number.isRequired,
-//   onAnswer: PropTypes.func.isRequired
-// };
+GenreQuestionScreen.PropTypes = {
+  question: PropTypes.exact({
+    type: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    answers: PropTypes.arrayOf(PropTypes.exact({
+      src: PropTypes.string.isRequired,
+      genre: PropTypes.string.isRequired,
+    })).isRequired,
+  }).isRequired,
+  screenIndex: PropTypes.number.isRequired,
+  onAnswer: PropTypes.func.isRequired
+};
 
 export default GenreQuestionScreen;

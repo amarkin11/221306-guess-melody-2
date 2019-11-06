@@ -1,8 +1,8 @@
 
-// const settings = {
-//   time: 7,
-//   errorCount: 4
-// };
+const settings = {
+  gameTime: 5,
+  errorCount: 3
+};
 
 const questions = [
   {
@@ -50,5 +50,5 @@ const questions = [
   }
 ];
 
-export default questions;
+export {questions, settings};
 
