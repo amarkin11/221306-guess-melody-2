@@ -1,4 +1,3 @@
-
 import React from "react";
 import PropTypes from "prop-types";
 
@@ -59,7 +58,7 @@ ArtistQuestionScreen.PropTypes = {
   question: PropTypes.exact({
     type: PropTypes.string.isRequired,
     song: PropTypes.exact({
-      atrist: PropTypes.string.isRequired,
+      artist: PropTypes.string.isRequired,
       src: PropTypes.string.isRequired
     }).isRequired,
     answers: PropTypes.arrayOf(PropTypes.exact({
@@ -72,4 +71,3 @@ ArtistQuestionScreen.PropTypes = {
 };
 
 export default ArtistQuestionScreen;
-

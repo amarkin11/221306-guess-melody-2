@@ -1,9 +1,12 @@
-
 import React from "react";
 import PropTypes from "prop-types";
 
 const GenreQuestionScreen = ({question, screenIndex, onAnswer}) => {
   const {answers, genre} = question;
+  const handleAnswer = (evt) => {
+    evt.preventDefault();
+    onAnswer();
+  };
 
   return <section className="game game--genre">
     <header className="game__header">
@@ -31,10 +34,7 @@ const GenreQuestionScreen = ({question, screenIndex, onAnswer}) => {
 
     <section className="game__screen">
       <h2 className="game__title">Выберите {genre} треки</h2>
-      <form className="game__tracks" onSubmit={(evt) => {
-        evt.preventDefault();
-        onAnswer();
-      }}>
+      <form className="game__tracks" onSubmit={handleAnswer}>
         {answers.map((it, i) => (
           <div className="track" key={`${screenIndex}-answer-${i}`}>
             <button className="track__button track__button--play" type="button"></button>

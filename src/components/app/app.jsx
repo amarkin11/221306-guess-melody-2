@@ -19,19 +19,22 @@ class App extends React.PureComponent {
         onStartButtonClick={onUserAnswer}
       />;
     }
+
     const {questions} = props;
     const currentQuestion = questions[question];
+    const questionProps = {
+      screenIndex: question,
+      question: currentQuestion,
+      onAnswer: onUserAnswer
+    };
+
     switch (currentQuestion.type) {
       case `genre`: return <GenreQuestionScreen
-        screenIndex={question}
-        question={currentQuestion}
-        onAnswer={onUserAnswer}
+        {...questionProps}
       />;
 
       case `artist`: return <ArtistQuestionScreen
-        screenIndex={question}
-        question={currentQuestion}
-        onAnswer={onUserAnswer}
+        {...questionProps}
       />;
     }
     return null;
@@ -43,22 +46,26 @@ class App extends React.PureComponent {
     this.state = {
       question: -1,
     };
+
+    this._handleAnswer = this._handleAnswer.bind(this);
+  }
+
+  _handleAnswer() {
+    this.setState((prevState, questions) => {
+      const nextIndex = prevState.question + 1;
+      const isEnd = nextIndex >= questions.length;
+
+      return {
+        question: !isEnd ? nextIndex : -1,
+      };
+    });
   }
 
   render() {
     const {questions} = this.props;
     const {question} = this.state;
 
-    return App.getScreen(question, this.props, () => {
-      this.setState((prevState) => {
-        const nextIndex = prevState.question + 1;
-        const isEnd = nextIndex >= questions.length;
-
-        return {
-          question: !isEnd ? nextIndex : -1,
-        };
-      });
-    });
+    return App.getScreen(question, this.props, this._handleAnswer);
   }
 }
 
@@ -67,16 +74,10 @@ App.propTypes = {
   errorCount: PropTypes.number.isRequired,
   questions: PropTypes.arrayOf(PropTypes.exact({
     type: PropTypes.string.isRequired,
-    genre: PropTypes.string,
-    answers: PropTypes.arrayOf(PropTypes.exact({
-      src: PropTypes.string.isRequired,
-      genre: PropTypes.string.isRequired,
-    })).isRequired,
-    song: PropTypes.shape({
-      artist: PropTypes.string.isRequired,
-      src: PropTypes.string.isRequired
-    })
-  })).isRequired
+    genre: PropTypes.string.isRequired,
+    answers: PropTypes.array.isRequired,
+    song: PropTypes.object.isRequired
+  }))
 };
 
 export default App;

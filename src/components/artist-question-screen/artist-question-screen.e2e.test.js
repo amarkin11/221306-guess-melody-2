@@ -1,4 +1,3 @@
-
 import React from "react";
 import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
@@ -12,7 +11,7 @@ it(`when the user answers, the callback function gets the data in the correct fo
     question={{
       type: `artist`,
       song: {
-        atrist: ``,
+        artist: ``,
         src: ``
       },
       answers: [

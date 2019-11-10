@@ -1,4 +1,3 @@
-
 import React from "react";
 import renderer from "react-test-renderer";
 import ArtistQuestionScreen from "./artist-question-screen";
@@ -9,7 +8,7 @@ it(`Artist question screen correctly renders after relaunch`, () => {
       question={{
         type: `artist`,
         song: {
-          atrist: ``,
+          artist: ``,
           src: ``
         },
         answers: [
