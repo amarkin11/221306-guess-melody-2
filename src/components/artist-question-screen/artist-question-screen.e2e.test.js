@@ -22,7 +22,7 @@ it(`when the user answers, the callback function gets the data in the correct fo
       ]
     }}
     screenIndex={0}
-    onAnswer={jest.fn()}
+    onAnswer={onUserAnswer}
   />);
 
   const formSubmit = artistQuestionScreen.find(`.game__artist`);

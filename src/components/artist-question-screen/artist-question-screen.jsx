@@ -54,7 +54,7 @@ const ArtistQuestionScreen = ({question, screenIndex, onAnswer}) => {
   </section>;
 };
 
-ArtistQuestionScreen.PropTypes = {
+ArtistQuestionScreen.propTypes = {
   question: PropTypes.exact({
     type: PropTypes.string.isRequired,
     song: PropTypes.exact({

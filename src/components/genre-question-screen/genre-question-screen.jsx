@@ -53,7 +53,7 @@ const GenreQuestionScreen = ({question, screenIndex, onAnswer}) => {
   </section>;
 };
 
-GenreQuestionScreen.PropTypes = {
+GenreQuestionScreen.propTypes = {
   question: PropTypes.exact({
     type: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,

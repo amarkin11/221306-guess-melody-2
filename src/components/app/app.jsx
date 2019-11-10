@@ -51,7 +51,8 @@ class App extends React.PureComponent {
   }
 
   _handleAnswer() {
-    this.setState((prevState, questions) => {
+    const {questions} = this.props;
+    this.setState((prevState) => {
       const nextIndex = prevState.question + 1;
       const isEnd = nextIndex >= questions.length;
 
@@ -62,7 +63,6 @@ class App extends React.PureComponent {
   }
 
   render() {
-    const {questions} = this.props;
     const {question} = this.state;
 
     return App.getScreen(question, this.props, this._handleAnswer);
@@ -72,12 +72,7 @@ class App extends React.PureComponent {
 App.propTypes = {
   gameTime: PropTypes.number.isRequired,
   errorCount: PropTypes.number.isRequired,
-  questions: PropTypes.arrayOf(PropTypes.exact({
-    type: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    answers: PropTypes.array.isRequired,
-    song: PropTypes.object.isRequired
-  }))
+  questions: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 export default App;
